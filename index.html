@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <script>
+    var firstTime = true;
+
     function f(x) {
       return document.forms["myForm"][x].value;
     }
@@ -40,8 +42,14 @@
 
       // prompt("Name", sql);
 
-      document.getElementById("formOutput").innerHTML +=
-        sql + "\n";
+      if (firstTime) {
+        document.getElementById("formOutput").innerHTML =
+          sql + "\n";
+        firstTime = false;
+      } else {
+        document.getElementById("formOutput").innerHTML +=
+          "," + sql + "\n";
+      }
       return false;
     }
   </script>
