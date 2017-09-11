@@ -23,19 +23,73 @@
       sql += sqlQuote(f("payer"));
       sql += ")";
 
-      prompt("Name", sql);
-      return true;
+      // prompt("Name", sql);
+
+      document.getElementById("formOutput").innerHTML =
+        sql;
+      return false;
     }
   </script>
 </head>
 <body>
 
-  <p>Enter data in the form below and submit to produce a SQL insert line.</p>
+  <p>Enter data in the form below and submit to produce a SQL insert tuple.</p>
 
-  <form name="myForm" onsubmit="return checkForm()" method="post">
+  <form name="myForm" onsubmit="return checkForm()" method="get">
     Task receptacle: <input type="text" name="task_receptacle"><br />
 
-    Task vanue: <input type="text" name="task_venue"><br />
+    Task receptacle URL: <input type="text" name="task_receptacle_url"><br />
+
+    Task venue: <select id="task_venue">
+      <option>Wikipedia</option>
+      <option>Wikipedia views</option>
+      <option>Effective Altruism Forum</option>
+      <option>LessWrong</option>
+      <option>Personal website</option>
+      <option>Wikimedia meta</option>
+      <option>wikiHow</option>
+      <option>Quora</option>
+      <option>Market subwiki</option>
+      <option>Donations list website</option>
+      <option>Contract work for Vipul Naik</option>
+      <option>Timelines wiki</option>
+      <option>Wikiquote</option>
+      <option>Vim Tips Wiki</option>
+      <option>Effective Altruism Wiki</option>
+      <option>Cognito Mentoring Information Wiki</option>
+      <option>Cause Prioritization Wiki</option>
+      <option>GitHub</option>
+      <option value="">None</option>
+    </select><br />
+
+    Task type: <select id="task_type">
+      <option>Wikipedia page creation</option>
+      <option>Wikipedia page update</option>
+      <option>Wikipedia page translation</option>
+      <option>Attempted Wikipedia work</option>
+      <option>Miscellaneous Wikipedia work</option>
+      <option>Preliminary research</option>
+      <option>Blog post or article</option>
+      <option>Survey creation</option>
+      <option>Survey recruitment</option>
+      <option>Coding</option>
+      <option>Consulting</option>
+      <option>Review</option>
+      <option>Wiki page creation</option>
+      <option>Wiki page update</option>
+      <option>Questions and answers</option>
+      <option>Contacting people</option>
+      <option>Data entry</option>
+      <option>Task listing</option>
+      <option>Content migration</option>
+      <option>Timelines page creation</option>
+      <option>Timelines page update</option>
+      <option>Worker onboarding and assistance</option>
+    </select><br />
+
+    Completion date: <input type="text" name="completion_date" value="2017-09-11"><br />
+
+    Payment amount: <input type="text" name="payment"><br />
 
     Payer: <select id="payer">
       <option value="">NULL</option>
@@ -44,8 +98,21 @@
     </select>
     <br />
 
+    Topic: <input type="text" name="topic"><br />
+
+    Format: <input type="format" name="format"><br />
+
+    Notes:<br /> <textarea rows="5" cols="80">
+    </textarea>
+    <br />
+
     <input type="submit" value="Submit">
   </form>
+
+  <p>
+  <pre><code><span id="formOutput"></span>
+</code></pre>
+  </p>
 
 </body>
 </html>
