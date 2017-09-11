@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <script>
+    function f(x) {
+      return document.forms["myForm"][x].value;
+    }
+
+    function sqlQuote(x) {
+      if (! x) {
+        return "NULL";
+      }
+      x = x.replace("\\", "\\\\");
+      x = x.replace("'", "''");
+      return "'" + x + "'";
+    }
+
+    function checkForm() {
+      var sql = "(";
+      sql += sqlQuote(f("name")) + ",";
+      sql += sqlQuote(f("payer"));
+      sql += ")";
+
+      prompt("Name", sql);
+      return true;
+    }
+  </script>
+</head>
+<body>
+
+  <p>Enter data in the form below and submit to produce a SQL insert line.</p>
+
+  <form name="myForm" onsubmit="return checkForm()" method="post">
+    Task receptacle: <input type="text" name="task_receptacle"><br />
+
+    Task vanue: <input type="text" name="task_venue"><br />
+
+    Payer: <select id="payer">
+      <option value="">NULL</option>
+      <option>Vipul Naik</option>
+      <option>Peter Hurford</option>
+    </select>
+    <br />
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
