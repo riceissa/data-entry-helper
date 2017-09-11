@@ -19,8 +19,15 @@
 
     function checkForm() {
       var sql = "(";
-      sql += sqlQuote(f("name")) + ",";
-      sql += sqlQuote(f("payer"));
+      sql += sqlQuote(f("task_venue"));
+      sql += "," + sqlQuote(f("task_type"));
+      sql += "," + sqlQuote(f("task_receptacle"));
+      sql += "," + sqlQuote(f("task_receptacle_url"));
+      sql += "," + sqlQuote(f("completion_date"));
+      sql += "," + f("payment");
+      sql += "," + sqlQuote(f("topic"));
+      sql += "," + sqlQuote(f("format"));
+      sql += "," + sqlQuote(f("notes"));
       sql += ")";
 
       // prompt("Name", sql);
@@ -102,8 +109,8 @@
 
     Format: <input type="format" name="format"><br />
 
-    Notes:<br /> <textarea rows="5" cols="80">
-    </textarea>
+    Notes:<br />
+    <textarea rows="5" cols="80" id="notes"></textarea>
     <br />
 
     <input type="submit" value="Submit">
