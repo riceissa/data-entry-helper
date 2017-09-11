@@ -12,8 +12,9 @@
       if (! x) {
         return "NULL";
       }
-      x = x.replace("\\", "\\\\");
-      x = x.replace("'", "''");
+      x = x.replace(/\\/g, "\\\\");
+      x = x.replace(/'/g, "''");
+      x = x.replace(/\n/g, "\\n");
       return "'" + x + "'";
     }
 
