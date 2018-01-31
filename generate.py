@@ -113,7 +113,8 @@ def main():
 def form_part(label, sql_column, sql_type, sql_type_params=None):
     result = label + ": "
     if sql_type == "enum":
-        result += """<select id="{}">""".format(sql_column)
+        result += """<select id="{}">
+                        <option value="">NULL</option>""".format(sql_column)
         for option in sql_type_params:
             result += "<option>" + option + "</option>"
         result += "</select><br />"
