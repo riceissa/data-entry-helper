@@ -158,7 +158,7 @@ def form_part(label, sql_column, sql_type, sql_type_params=None):
         result += """<input type="text" name="{}"><br />""".format(sql_column)
     elif sql_type == "varchar":
         if sql_type_params <= 200:
-            result += """<input type="text" name="{}"><br />""".format(sql_column)
+            result += """<input type="text" size="80" name="{}"><br />""".format(sql_column)
         else:
             result += """<br />
                 <textarea rows="5" cols="80" id="{}"></textarea>
