@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <script>
+    var firstTime = true;
+
+    function f(x) {
+      return document.forms["myForm"][x].value;
+    }
+
+    function sqlQuote(x) {
+      if (! x) {
+        return "NULL";
+      }
+      x = x.replace(/\\/g, "\\\\");
+      x = x.replace(/'/g, "''");
+      x = x.replace(/\n/g, "\\n");
+      return "'" + x + "'";
+    }
+
+    function sqlNumber(x) {
+      if (! x) {
+        return "NULL";
+      }
+      return x;
+    }
+    function checkForm() {
+      var sql = "(";
+sql += sqlQuote(f("url"));
+sql += "," + sqlQuote(f("title"));
+sql += "," + sqlQuote(f("publication_date"));
+sql += "," + sqlQuote(f("modified_date"));
+sql += "," + sqlQuote(f("author"));
+sql += "," + sqlQuote(f("publisher"));
+sql += "," + sqlQuote(f("affected_donors"));
+sql += "," + sqlQuote(f("affected_donees"));
+sql += "," + sqlQuote(f("document_scope"));
+sql += "," + sqlQuote(f("cause_area"));
+sql += "," + sqlQuote(f("notes"));
+sql += ")";
+
+      // prompt("Name", sql);
+
+      if (firstTime) {
+        document.getElementById("formOutput").innerHTML =
+          sql + "\n";
+        firstTime = false;
+      } else {
+        document.getElementById("formOutput").innerHTML +=
+          "," + sql + "\n";
+      }
+      return false;
+    }
+  </script>
+</head>
+<body>
+
+  <p>Enter data in the form below and submit to produce a SQL insert tuple.</p>
+
+  <form name="myForm" onsubmit="return checkForm()" method="get">
+URL: <input type="text" name="url"><br />
+Title: <input type="text" name="title"><br />
+Publication date: <input type="text" name="publication_date"><br />
+Modified date: <input type="text" name="modified_date"><br />
+Author: <input type="text" name="author"><br />
+Publisher: <input type="text" name="publisher"><br />
+Affected donors: <input type="text" name="affected_donors"><br />
+Affected donees: <input type="text" name="affected_donees"><br />
+Document scope: <select id="document_scope">
+                        <option value="">NULL</option><option>Launch</option><option>Pre-launch planning</option><option>Broad donor strategy</option><option>Single donation documentation</option><option>Donee periodic update</option><option>Donee donation case</option><option>Evaluator review of donee</option><option>Evaluator update on donee</option><option>Evaluator consolidated recommendation list</option><option>Periodic donation list documentation</option><option>Reasoning supplement</option><option>Third-party coverage of donor strategy</option><option>Third-party case for donation</option><option>Third-party case against donation</option><option>Donation suggestion list</option><option>Unsolicited third-party suggestions for donor</option><option>Review of current state of cause area</option><option>Status change</option><option>Miscellaneous commentary</option><option>Donee AMA</option><option>Evaluator retrospective</option><option>Evaluator quantification approach</option><option>Job advertisement</option><option>Request for proposals</option><option>Request for reviews of donee</option></select><br />
+Cause area: <input type="text" name="cause_area"><br />
+Notes: <br />
+                <textarea rows="5" cols="80" id="notes"></textarea>
+                <br />
+<input type="submit" value="Submit">
+             </form>
+<p>
+  <pre><code><textarea rows="30" cols="100" id="formOutput">Output will appear here</textarea></code></pre>
+  </p>
+            </body>
+</html>

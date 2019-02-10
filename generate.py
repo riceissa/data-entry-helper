@@ -2,6 +2,20 @@
 
 import re
 
+DLW_DOCUMENTS_FIELDS = [
+        ("URL", "url", "varchar", 200),
+        ("Title", "title", "varchar", 200),
+        ("Publication date", "publication_date", "date", None),
+        ("Modified date", "modified_date", "date", None),
+        ("Author", "author", "varchar", 200),
+        ("Publisher", "publisher", "varchar", 200),
+        ("Affected donors", "affected_donors", "varchar", 200),
+        ("Affected donees", "affected_donees", "varchar", 200),
+        ("Document scope", "document_scope", "enum", ['Launch','Pre-launch planning','Broad donor strategy','Single donation documentation','Donee periodic update','Donee donation case','Evaluator review of donee','Evaluator update on donee','Evaluator consolidated recommendation list','Periodic donation list documentation','Reasoning supplement','Third-party coverage of donor strategy','Third-party case for donation','Third-party case against donation','Donation suggestion list', 'Unsolicited third-party suggestions for donor','Review of current state of cause area', 'Status change','Miscellaneous commentary', 'Donee AMA', 'Evaluator retrospective','Evaluator quantification approach','Job advertisement','Request for proposals','Request for reviews of donee']),
+        ("Cause area", "cause_area", "varchar", 200),
+        ("Notes", "notes", "varchar", 2000),
+        ]
+
 
 FIELDS = [
         ("Donor", "donor", "varchar", 100),
@@ -39,6 +53,7 @@ FIELDS = [
         ("Notes", "notes", "varchar", 5000),
         ]
 
+FIELDS = DLW_DOCUMENTS_FIELDS
 
 def parse_line(line):
     sql_column = ""
