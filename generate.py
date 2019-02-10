@@ -55,6 +55,7 @@ FIELDS = [
 
 FIELDS = DLW_DOCUMENTS_FIELDS
 
+# note: this isn't used for now
 def parse_line(line):
     sql_column = ""
     sql_type = ""
