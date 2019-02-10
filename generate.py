@@ -77,6 +77,10 @@ def main():
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <script>
+    function clearForm() {
+        document.getElementsByName("myForm")[0].reset();
+    }
+
     var firstTime = true;
 
     function f(x) {
@@ -134,6 +138,7 @@ def main():
         print(form_part(*field))
 
     print("""<input type="submit" value="Submit">
+             <input type="button" onclick="clearForm()" value="Clear form">
              </form>""")
     print("""<p>
   <pre><code><textarea rows="30" cols="100" id="formOutput">Output will appear here</textarea></code></pre>
