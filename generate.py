@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import re
+
+
 FIELDS = [
         ("Donor", "donor", "varchar", 100),
         ("Donor type", "donor_type", "enum", ['Individual','Couple','Donor group','Subsidiary','Private foundation']),
@@ -35,6 +38,22 @@ FIELDS = [
         ("Grant financing notes", "grant_financing_notes", "varchar", 2000),
         ("Notes", "notes", "varchar", 5000),
         ]
+
+
+def parse_line(line):
+    sql_column = ""
+    sql_type = ""
+    sql_type_params = None
+    m = re.match(r"""\s+([A-Za-z_]+)\s+([A-Za-z]+)\(([^)]+)\)""", line)
+    if m:
+        sql_column = m.group(1)
+        sql_type = m.group(2)
+        sql_type_params = m.group(3)
+    # I might want to do some shotgun parsing like in https://github.com/riceissa/fred-processing/blob/master/modify_sql.py
+    if sql_type == "enum":
+        m = re.match(r""" """, sql_type_params)
+    return (sql_column, sql_type, sql_type_params)
+
 
 def main():
     print(r"""<!DOCTYPE html>
@@ -118,7 +137,7 @@ def form_part(label, sql_column, sql_type, sql_type_params=None):
         for option in sql_type_params:
             result += "<option>" + option + "</option>"
         result += "</select><br />"
-    elif sql_type == "int":
+    elif sql_type == "int" or sql_type == "float":
         result += """<input type="text" name="{}"><br />""".format(sql_column)
     elif sql_type == "date":
         result += """<input type="text" name="{}"><br />""".format(sql_column)
