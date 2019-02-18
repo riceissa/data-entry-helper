@@ -92,6 +92,10 @@ def main():
       if (! x) {
         return "NULL";
       }
+      x = x.trim();
+      if (! x) {
+        return "NULL";
+      }
       x = x.replace(/\\/g, "\\\\");
       x = x.replace(/'/g, "''");
       x = x.replace(/\n/g, "\\n");
